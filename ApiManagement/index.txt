@@ -1,0 +1,43 @@
+<policies>
+    <inbound>
+        <base />
+        <rate-limit-by-key calls="2" renewal-period="10" counter-key="@(context.Subscription.Id)" />
+        <choose>
+            <when condition="@(context.Request.OriginalUrl.Query.GetValueOrDefault("id")?.ToLower() == "001")">
+                <return-response>
+                    <set-status code="200" reason="OK" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>@{
+                return new JObject(
+                        new JProperty("username","Morgan Pizzini")
+                    ).ToString(Newtonsoft.Json.Formatting.None);
+                }</set-body>
+                </return-response>
+            </when>
+            <otherwise>
+                <return-response>
+                    <set-status code="200" reason="OK" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>@{
+                return new JObject(
+                        new JProperty("username","Who!?")
+                    ).ToString(Newtonsoft.Json.Formatting.None);
+                }</set-body>
+                </return-response>
+            </otherwise>
+        </choose>
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
