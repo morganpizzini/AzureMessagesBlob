@@ -1,2 +1,2 @@
-## Azure
-Demos of my talk about Azure Service Bus, Event Grid, Blob container, serverless functions and cognitive services
+## Azure Messages and Blob Storage
+Demos of my talk about Azure Service Bus, Event Grid,Api Management, Blob container, Serverless Functions and cognitive services
