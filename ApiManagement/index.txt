@@ -3,6 +3,9 @@
         <base />
         <rate-limit-by-key calls="2" renewal-period="10" counter-key="@(context.Subscription.Id)" />
         <choose>
+            <!-- from url template -->
+        <!--<when condition="@(context.Request.MatchedParameters["id"]?.ToLower() == "001")"> -->
+            <!-- from query string -->
             <when condition="@(context.Request.OriginalUrl.Query.GetValueOrDefault("id")?.ToLower() == "001")">
                 <return-response>
                     <set-status code="200" reason="OK" />
